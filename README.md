@@ -20,7 +20,7 @@ download [win64 binary distribution](http://www.pedroboechat.com/downloads/crypt
 
 ![](http://www.pedroboechat.com/images/crypto-list-3.png)
 
-![](http://www.pedroboechat.com/images/crypto-list-4.png)
+![](http://www.pedroboechat.com/images/crypto-list-4(2).png)
 
 ![](http://www.pedroboechat.com/images/crypto-list-5.png)
 
