@@ -4,6 +4,7 @@
 ## Requirements
 
 - Python 3
+- TkInter
 - cryptography >= 1.8.1
 
 ## Usage
