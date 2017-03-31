@@ -14,7 +14,7 @@ python crypto_list.py
 
 or
 
-download [win_amd64 binary distribution](http://www.pedroboechat.com/downloads/crypto_list.zip) and run crypto_list.exe
+download [win](http://www.pedroboechat.com/downloads/crypto_list_win64.zip) or [linux](http://www.pedroboechat.com/downloads/crypto_list_linux64.zip) _amd64_ binary distribution, and run crypto_list.
 
 ### Saving a list
 
