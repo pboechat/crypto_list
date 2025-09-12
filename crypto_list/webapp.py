@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import contextlib
 from pathlib import Path
 from typing import *
@@ -65,8 +66,15 @@ def create_app() -> FastAPI:
     return app
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     # Lazy import to avoid uvicorn being required at import time
     import uvicorn
+    parser = argparse.ArgumentParser(
+        prog="crypto-list-webapp",
+        description="Run the crypto_list web app (FastAPI + SPA)",
+    )
+    parser.add_argument("--host", default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
+    parser.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000)")
+    args = parser.parse_args(argv)
 
-    uvicorn.run(create_app(), host="127.0.0.1", port=8000, log_level="info")
+    uvicorn.run(create_app(), host=args.host, port=args.port, log_level="info")
