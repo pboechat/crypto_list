@@ -1,79 +1,77 @@
 # crypto_list
----
+
+<img src="https://github.com/pboechat/crypto_list/blob/master/crypto_list/images/logo.png" alt="crypto_list" height="128px"></img>
+
+A straight-forward secret manager with an easy-to-use Tkinter UI.
+
+## Highlights (new vs legacy)
+
+- Single encrypted file now embeds the salt (no separate *.salt management).
+- JSON-based storage inside encryption (replaces pickle for safety).
+- Backward compatible reading of old files (legacy files + external salt). When you save them they are migrated automatically to the new format.
+- Faster everyday workflow: toolbar buttons, inline search, instant filtering, auto-saving of modified entries on focus change.
+- Change master password from the UI (generates a new salt upon save).
 
 ## Requirements
 
-- Python 3
-- TkInter
-- cryptography >= 1.8.1
+- Python 3.9+ (earlier may work but is untested)
+- Standard library Tkinter (usually included with Python; install system package if missing)
+- cryptography (see pyproject.toml)
 
-## Usage
+## Installation
 
-### Starting the application
+Clone the repo and install:
 
-python crypto_list.py
+```bash
+pip install .
+```
 
-or
+Or run in editable/development mode:
 
-download [win](http://pedroboechat.com/downloads/crypto_list_win64.zip) or [linux](http://pedroboechat.com/downloads/crypto_list_linux64.zip) _amd64_ binary distribution, and run crypto_list.
+```bash
+pip install -e .
+```
 
-### Saving a list
+## Running
 
-1. Run the application.
+```bash
+crypto-list
+```
 
-![](http://pedroboechat.com/images/crypto-list-1.png)
+## Usage Overview
 
+1. New: Click "New" (or Ctrl+N) to start a list.
+2. Add: Click "Add" to create a new empty entry, then fill Key/Value.
+3. Save: Click "Save" (or Ctrl+S). You'll be asked to create & confirm a password the first time. A single `.crypto_list` file is written (salt embedded).
+4. Open: Click "Open" (or Ctrl+O) and provide the password. Legacy files (pre v2) will still prompt you to choose the original salt file once.
+5. Edit/Rename: Select an entry, change fields, focus elsewhere or click "Save Entry" to persist.
+6. Filter: Type in the Search box to instantly filter keys.
+7. Copy: Select an entry and press "Copy" to put its value on the clipboard.
+8. Change Password: Use the toolbar button—file is re-encrypted with new salt.
 
-2. Add a new entry.
+Unsaved changes trigger a confirmation dialog if you attempt to close or open another file.
 
-![](http://pedroboechat.com/images/crypto-list-2.png)
+## File Format (v2)
 
+```
+MAGIC 5 bytes:  'CLST1'
+SALT  16 bytes:  random per file
+TOKEN Fernet:    encryption of JSON {"version":1, "entries":{...}}
+```
 
-3. Save entries to an encrypted list file (\*.crypto_list).
+Salt is not secret; embedding eliminates user error. Password derivation uses PBKDF2-HMAC-SHA256 with 200k iterations.
 
-![](http://pedroboechat.com/images/crypto-list-3.png)
+## Legacy Support
 
-![](http://pedroboechat.com/images/crypto-list-4(2).png)
+If the file does not start with the magic header it is treated as legacy. The app will ask for the legacy salt file; after a successful save the file migrates to the new format automatically.
 
+## Security Notes
 
-4. Create a new salt (to be hashed along with your master key). You'll need the salt along with your master key to decrypt this list later, so save it to a file (\*.salt) and keep the file in a safe place!
+- Your master password is never stored. If you forget it *there is no recovery*.
+- Clipboard operations may leave sensitive data accessible to other processes—clear clipboard manually if required.
+- Consider using a strong password (lengthy passphrase). Longer is better.
 
-![](http://pedroboechat.com/images/crypto-list-5.png)
+## Disclaimer
 
-![](http://pedroboechat.com/images/crypto-list-6.png)
+Software is provided "AS IS" without warranty of any kind. Use at your own risk.
 
-
-5. Define a master key. You'll need memorize the master key to decrypt this list later.
-
-![](http://pedroboechat.com/images/crypto-list-7.png)
-
-
-### Opening a list
-
-1. Run the application.
-
-![](http://pedroboechat.com/images/crypto-list-1.png)
-
-
-2. Open an encrypted list file (\*.crypto_list).
-
-![](http://pedroboechat.com/images/crypto-list-8.png)
-
-![](http://pedroboechat.com/images/crypto-list-9.png)
-
-
-3. Load the salt used to encrypt the list you're trying to open along with your master key.
-
-![](http://pedroboechat.com/images/crypto-list-10.png)
-
-![](http://pedroboechat.com/images/crypto-list-11.png)
-
-
-4. Input the master key you used to encrypt the list you're trying to open.
-
-![](http://pedroboechat.com/images/crypto-list-12.png)
-
-
-### Disclaimer
-
-The software is provided "as is". Use it at your own risk. If you forget your master key or lose your salt file, I won't be able to help you.

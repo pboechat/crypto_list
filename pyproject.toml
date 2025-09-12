@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling>=1.21.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "crypto-list"
+version = "2.0.0"
+description = "Encrypted key/value password manager with improved Tkinter UI (salt-embedded file format)."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [
+  { name = "Pedro Boechat" }
+]
+keywords = ["password", "encryption", "fernet", "tkinter", "manager"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Security :: Cryptography",
+  "Topic :: Utilities",
+]
+dependencies = [
+  # Using a recent cryptography for security updates.
+  "cryptography>=41.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.5.0",
+  "mypy>=1.10.0",
+  "pytest>=8.0.0",
+  "pytest-cov>=5.0.0",
+]
+
+[project.scripts]
+crypto-list = "crypto_list.app:main"
+
+[project.urls]
+Homepage = "https://github.com/pboechat/crypto_list"
+Repository = "https://github.com/pboechat/crypto_list"
+Issues = "https://github.com/pboechat/crypto_list/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["crypto_list"]
+include = [
+  "crypto_list/icons/*.png",
+  "crypto_list/images/*.png",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "crypto_list/**",
+  "README.md",
+  "LICENSE",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+select = ["E", "F", "W", "I", "B", "C4", "UP"]
+fix = true
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+testpaths = ["tests"]
