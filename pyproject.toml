@@ -26,6 +26,8 @@ classifiers = [
 dependencies = [
   # Using a recent cryptography for security updates.
   "cryptography>=41.0.0",
+  "fastapi>=0.110.0",
+  "uvicorn[standard]>=0.23.0",
 ]
 
 [project.optional-dependencies]
@@ -38,6 +40,7 @@ dev = [
 
 [project.scripts]
 crypto-list = "crypto_list.app:main"
+crypto-list-webapp = "crypto_list.webapp:main"
 
 [project.urls]
 Homepage = "https://github.com/pboechat/crypto_list"
@@ -49,6 +52,8 @@ packages = ["crypto_list"]
 include = [
   "crypto_list/icons/*.png",
   "crypto_list/images/*.png",
+  "crypto_list/web/*",
+  "crypto_list/web/favicon.ico",
 ]
 
 [tool.hatch.build.targets.sdist]

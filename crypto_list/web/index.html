@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>crypto_list (web)</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+    <header class="toolbar">
+        <button id="btn-new" title="New"><img src="/icons/new.png" alt="New" /></button>
+        <button id="btn-open" title="Open"><img src="/icons/open.png" alt="Open" /></button>
+        <button id="btn-save" title="Save"><img src="/icons/save.png" alt="Save" /></button>
+        <button id="btn-add" title="Add"><img src="/icons/add.png" alt="Add" /></button>
+        <button id="btn-delete" title="Delete"><img src="/icons/delete.png" alt="Delete" /></button>
+        <button id="btn-copy" title="Copy"><img src="/icons/copy.png" alt="Copy" /></button>
+        <button id="btn-chpw" title="Change password"><img src="/icons/change_password.png"
+                alt="Change password" /></button>
+        <div class="spacer"></div>
+        <input id="search" placeholder="Search" />
+    </header>
+
+    <main class="split">
+        <section class="left">
+            <ul id="list"></ul>
+        </section>
+        <section class="right">
+            <label>Key</label>
+            <input id="key" />
+            <label>Value</label>
+            <textarea id="value" rows="10"></textarea>
+            <div class="form-actions">
+                <button id="btn-save-entry">Save Entry</button>
+                <button id="btn-new-entry">New Entry</button>
+            </div>
+        </section>
+    </main>
+
+    <footer id="status">Ready</footer>
+
+    <input type="file" id="file-input" accept=".crypto_list" style="display: none" />
+
+    <!-- Password Modal -->
+    <div id="modal-backdrop" class="modal-backdrop" style="display: none"></div>
+    <div id="password-modal" class="modal" style="display: none" role="dialog" aria-modal="true"
+        aria-labelledby="password-modal-title">
+        <div class="modal-content">
+            <h3 id="password-modal-title">Password</h3>
+            <p id="password-modal-msg">Enter password</p>
+            <input id="password-modal-input" type="password" autocomplete="current-password" />
+            <div class="modal-actions">
+                <button id="password-modal-cancel">Cancel</button>
+                <button id="password-modal-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Salt chooser modal for legacy files -->
+    <div id="salt-modal" class="modal" style="display: none" role="dialog" aria-modal="true"
+        aria-labelledby="salt-modal-title">
+        <div class="modal-content">
+            <h3 id="salt-modal-title">Legacy salt required</h3>
+            <p id="salt-modal-msg">Please choose the .salt file corresponding to this list.</p>
+            <div class="modal-actions">
+                <button id="salt-modal-cancel">Cancel</button>
+                <button id="salt-modal-choose">Choose Salt…</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/static/app.js"></script>
+</body>
+
+</html>

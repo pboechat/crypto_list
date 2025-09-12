@@ -1,0 +1,212 @@
+:root {
+    --bg: #1e1e1e;
+    --surface: #252526;
+    --fg: #e6e6e6;
+    --border: #3c3c3c;
+    --accent: #569cd6;
+    --entry-bg: #2d2d30;
+    --select-bg: #094771;
+    --select-fg: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.toolbar {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 8px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.toolbar button {
+    background: #333;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.toolbar button:hover {
+    background: #3a3a3a;
+}
+
+.toolbar img {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.toolbar .spacer {
+    flex: 1;
+}
+
+.toolbar input {
+    background: var(--entry-bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    padding: 6px 8px;
+    border-radius: 4px;
+    min-width: 220px;
+}
+
+.split {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: calc(100% - 96px);
+}
+
+.left {
+    border-right: 1px solid var(--border);
+    overflow: auto;
+}
+
+.right {
+    padding: 12px;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr auto;
+    gap: 8px;
+}
+
+#list {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+}
+
+#list li {
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#list li:hover {
+    background: #2a2a2a;
+}
+
+#list li.selected {
+    background: var(--select-bg);
+    color: var(--select-fg);
+}
+
+label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+input,
+textarea {
+    background: var(--entry-bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.form-actions button {
+    background: #333;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-actions button:hover {
+    background: #3a3a3a;
+}
+
+footer#status {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--surface);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* Modal styles */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1001;
+}
+
+.modal .modal-content {
+    background: var(--surface);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    min-width: 320px;
+    max-width: 90vw;
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.modal .modal-content h3 {
+    margin: 0 0 8px 0;
+}
+
+.modal .modal-content p {
+    margin: 0 0 8px 0;
+    opacity: 0.9;
+}
+
+.modal .modal-content input[type="password"] {
+    width: 100%;
+    margin: 8px 0 0 0;
+}
+
+.modal .modal-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.modal .modal-actions button {
+    background: #333;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal .modal-actions button:hover {
+    background: #3a3a3a;
+}

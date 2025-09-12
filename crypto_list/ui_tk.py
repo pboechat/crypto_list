@@ -160,6 +160,8 @@ class CryptoListApp(ttk.Frame):
         self._search_entry = ttk.Entry(
             search_frame, textvariable=self._search_var)
         self._search_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=4)
+        # Pressing Enter selects the first filtered entry
+        self._search_entry.bind("<Return>", lambda e: self._select_first_filtered())
         clear_btn = ttk.Button(
             search_frame, text="×", width=3, command=lambda: self._search_var.set(""))
         clear_btn.pack(side=tk.LEFT)
@@ -287,6 +289,14 @@ class CryptoListApp(ttk.Frame):
     def _on_select(self) -> None:
         key = self._current_selected_key()
         self._load_entry_to_form(key)
+
+    def _select_first_filtered(self) -> None:
+        if not self._filtered_keys:
+            return
+        first_key = self._filtered_keys[0]
+        self._listbox.selection_clear(0, tk.END)
+        self._listbox.selection_set(0)
+        self._load_entry_to_form(first_key)
 
     def _mark_dirty(self):
         self._dirty = True
@@ -485,5 +495,4 @@ def run_app():
         pass
     root.minsize(720, 480)
     app = CryptoListApp(root)
-    app.mainloop()
     app.mainloop()
