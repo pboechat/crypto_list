@@ -13,7 +13,7 @@ A straight-forward, file-based secret manager with easy-to-use Tkinter and web i
 - Legacy compatibility: Pre-v2 files are PBKDF2-HMAC-SHA256 at 100,000 iterations with an external `.salt`, and the payload is typically a Python pickle. They can still be opened; on save they are migrated to v2 (JSON payload + embedded salt).
 
 Security notes and safety features:
-- Your master password is never stored or transmitted. It is also non-recoverable (meaning: less changes of being hacked!).
+- Your master password is never stored or transmitted. It is also non-recoverable (meaning: less chances of getting hacked!).
 - Authenticated encryption prevents silent corruption or tampering.
 - JSON payload in v2 avoids the risks of deserializing arbitrary pickles.
 - Desktop app: Secrets are decrypted only in memory. Clipboard operations may expose data to other processes—clear your clipboard as needed.
@@ -61,9 +61,7 @@ You can run a local FastAPI server that serves a single-page web client. All enc
 crypto-list-webapp
 ```
 
-Then open http://127.0.0.1:8000/
-
-In VS Code, there’s also a launch config named "Run Crypto List (Web)" that starts the server with auto-reload.
+Then open http://localhost:8000/
 
 ### Docker
 
@@ -91,9 +89,9 @@ The web app supports both v2 and legacy files. For legacy files, you’ll be pro
 3. Save: Click "Save" (or Ctrl+S). You'll be asked to create & confirm a password the first time. A single `.crypto_list` file is written (salt embedded).
 4. Open: Click "Open" (or Ctrl+O) and provide the password. Legacy files (pre v2) will still prompt you to choose the original salt file once.
 5. Edit/Rename: Select an entry, change fields, focus elsewhere or click "Save Entry" to persist.
-6. Filter: Type in the Search box to instantly filter keys.
+6. Search: Click on the search box (or Ctrl+F) and type to instantly filter keys.
 7. Copy: Select an entry and press "Copy" to put its value on the clipboard.
-8. Change Password: Use the toolbar button—file is re-encrypted with new salt.
+8. Change Password: Use the toolbar button and file is re-encrypted with new salt.
 
 Unsaved changes trigger a confirmation dialog if you attempt to close or open another file.
 
@@ -110,8 +108,6 @@ Salt is not secret; embedding eliminates user error. Password derivation uses PB
 ## Legacy Support
 
 If the file does not start with the magic header it is treated as legacy. The app will ask for the legacy salt file; after a successful save the file migrates to the new format automatically.
-
-The web app also supports opening legacy files: when you open a legacy `.crypto_list`, it will prompt you to select the matching `.salt` file. On save, it migrates to v2 and offers the new file as a download.
 
 ## Security Notes
 
