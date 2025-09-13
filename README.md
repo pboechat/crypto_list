@@ -2,7 +2,7 @@
 
 <img src="https://github.com/pboechat/crypto_list/blob/master/crypto_list/images/logo.png" alt="crypto_list" height="128px"></img>
 
-A straight-forward, file-based secret manager with an easy-to-use Tkinter UI and an web application. It keeps your data in a single encrypted file that you control and can sync or back up as you like!
+A straight-forward, file-based secret manager with easy-to-use Tkinter and web interfaces. It keeps your data in a single encrypted file that you control and sync or back up as you like!
 
 ## Cryptography overview
 
